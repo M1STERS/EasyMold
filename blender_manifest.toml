@@ -1,7 +1,7 @@
 schema_version = "1.0.0"
 
 id = "easymold"
-version = "1.0.0"
+version = "1.0.1"
 name = "EasyMold"
 tagline = "Molds for 3D printing: direct molds and silicone mother molds"
 maintainer = "Eddy Moncada Garcia <eddymoncadagarcia@gmail.com>"

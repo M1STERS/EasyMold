@@ -124,7 +124,7 @@ Requires **Blender 5.2** or newer.
 
 - **From Blender** (once the extension is approved): *Edit → Preferences → Get Extensions*, search for **EasyMold**,
   and click *Install*.
-- **From a release**: download `easymold-1.0.0.zip` from the
+- **From a release**: download `easymold-1.0.1.zip` from the
   [latest release](https://github.com/M1STERS/EasyMold/releases/latest). In Blender, go to *Edit → Preferences →
   Get Extensions*, open the ⌄ menu (top right), choose *Install from Disk…* and pick the zip.
 

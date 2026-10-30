@@ -1,7 +1,7 @@
 # extensions.blender.org listing
 
 Text and images to paste into the upload form at https://extensions.blender.org/submit/ (Blender ID needed).
-The package is the release zip, `easymold-1.0.0.zip`; the form reads the name, tagline, version, license, tags and
+The package is the release zip, `easymold-1.0.1.zip`; the form reads the name, tagline, version, license, tags and
 permissions from its manifest.
 
 ## Images to upload
