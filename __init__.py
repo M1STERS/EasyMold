@@ -11,27 +11,30 @@ if "bpy" in locals():
     importlib.reload(properties)
     importlib.reload(preview)
     importlib.reload(operators)
-    importlib.reload(presets)
     importlib.reload(ui)
 else:
+    import os
     import bpy
-    from . import analysis, export, utils, properties, preview, operators, presets, ui
+    from . import analysis, export, utils, properties, preview, operators, ui
+
+# The built-in presets ship in presets/easymold/ (Blender's preset system finds them with the user's own).
+ADDON_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 def register():
+    bpy.utils.register_preset_path(ADDON_DIR)
     properties.register()
     preview.register()
     operators.register()
-    presets.register()
     ui.register()
 
 
 def unregister():
     ui.unregister()
-    presets.unregister()
     operators.unregister()
     preview.unregister()
     properties.unregister()
+    bpy.utils.unregister_preset_path(ADDON_DIR)
 
 
 if __name__ == "__main__":

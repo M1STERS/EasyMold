@@ -1,13 +1,16 @@
 # SPDX-FileCopyrightText: 2026 Eddy Moncada Garcia
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import os
 import traceback
 
 import bpy
+from bl_operators.presets import AddPresetBase
 from bpy.app.handlers import persistent
 from mathutils import Vector
 
 from . import export, preview, utils
+from .properties import EasyMoldProperties
 
 # Events that still reach the viewport while a mold is being built, so the user can look around.
 NAVIGATION_EVENTS = {'MIDDLEMOUSE', 'WHEELUPMOUSE', 'WHEELDOWNMOUSE', 'MOUSEMOVE', 'INBETWEEN_MOUSEMOVE',
@@ -409,7 +412,30 @@ class EASYMOLD_OT_export(bpy.types.Operator):
         return {'FINISHED'}
 
 
+PRESET_SUBDIR = "easymold"  # presets/easymold/ in the add-on (built-in) and in the user's scripts folder
+PRESET_SKIP = {"core_object", "export_folder"}  # what belongs to one scene / file
+
+
+class EASYMOLD_OT_add_preset(AddPresetBase, bpy.types.Operator):
+    """Save the current settings as a preset (or remove the selected one of yours)"""
+    bl_idname = "easymold.add_preset"
+    bl_label = "Add EasyMold Preset"
+    preset_menu = "EASYMOLD_MT_presets"
+    preset_subdir = PRESET_SUBDIR
+    preset_defines = ["props = bpy.context.scene.easymold_props"]
+    preset_values = [f"props.{name}" for name in EasyMoldProperties.__annotations__ if name not in PRESET_SKIP]
+
+    def remove(self, _context, filepath):
+        # Blender only protects the presets in its own folders: the ones shipped with the add-on are kept too.
+        builtin = os.path.join(os.path.dirname(os.path.abspath(__file__)), "presets", PRESET_SUBDIR)
+        if os.path.normcase(os.path.dirname(os.path.abspath(filepath))) == os.path.normcase(builtin):
+            self.report({'WARNING'}, "Built-in presets can't be removed (only the ones you saved)")
+            return
+        os.remove(filepath)
+
+
 classes = (
+    EASYMOLD_OT_add_preset,
     EASYMOLD_OT_generate,
     EASYMOLD_OT_edit_layout,
     EASYMOLD_OT_add_marker,

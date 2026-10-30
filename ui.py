@@ -2,7 +2,14 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import bpy
-from . import preview, utils
+from . import operators, preview, utils
+
+
+class EASYMOLD_MT_presets(bpy.types.Menu):
+    bl_label = "Presets"
+    preset_subdir = operators.PRESET_SUBDIR
+    preset_operator = "script.execute_preset"
+    draw = bpy.types.Menu.draw_preset
 
 
 def _flags(props):
@@ -424,6 +431,7 @@ class VIEW3D_PT_easymold_export(_SubPanel, bpy.types.Panel):
 
 
 classes = (
+    EASYMOLD_MT_presets,
     VIEW3D_PT_easymold,
     VIEW3D_PT_easymold_master,
     VIEW3D_PT_easymold_mold,

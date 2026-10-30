@@ -7,9 +7,9 @@ import sys, importlib, os, glob, math
 import bpy, bmesh
 sys.stdout.reconfigure(line_buffering=True)
 sys.path.insert(0, __import__("os").path.dirname(__import__("os").path.abspath(__file__)))
-from _env import EasyMold, OUT
+from _env import EasyMold, OUT, ROOT
 EasyMold.register()
-from EasyMold import utils, presets
+from EasyMold import utils, operators
 failures = []
 
 
@@ -54,7 +54,7 @@ cast = utils.cast_needs(p, 28274)
 check("cast", near(cast['g'], 25.45) and near(cast['cost'], 0.127), str(cast))
 
 # --- 9: presets ----------------------------------------------------------------------------
-builtin = sorted(glob.glob(os.path.join(presets.BUILTIN_DIR, "*.py")))
+builtin = sorted(glob.glob(os.path.join(str(ROOT), "presets", operators.PRESET_SUBDIR, "*.py")))
 check("built-in presets", len(builtin) == 6, ", ".join(os.path.basename(f) for f in builtin))
 for path in builtin:
     bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -66,7 +66,7 @@ bpy.ops.wm.read_factory_settings(use_empty=True)
 p = bpy.context.scene.easymold_props
 p.mold_type, p.silicone_thickness, p.mix_a, p.shrinkage = 'SILICONE_SHELL', 7.5, 4.0, 1.25
 check("save user preset", bpy.ops.easymold.add_preset(name="My Test Preset") == {'FINISHED'}, "")
-files = [f for d in bpy.utils.preset_paths(presets.SUBDIR) for f in glob.glob(os.path.join(d, "*.py"))]
+files = [f for d in bpy.utils.preset_paths(operators.PRESET_SUBDIR) for f in glob.glob(os.path.join(d, "*.py"))]
 check("user preset file", any("my_test_preset" in f.lower() for f in files), str(files))
 p.mold_type, p.silicone_thickness, p.mix_a, p.shrinkage = 'DIRECT', 3.0, 1.0, 0.0
 user = next(f for f in files if "my_test_preset" in f.lower())

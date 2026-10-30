@@ -7,7 +7,7 @@ tagline = "Molds for 3D printing: direct molds and silicone mother molds"
 maintainer = "Eddy Moncada Garcia <eddymoncadagarcia@gmail.com>"
 type = "add-on"
 website = "https://github.com/M1STERS/EasyMold"
-tags = ["Mesh", "Modeling", "Object", "Import-Export"]
+tags = ["Modeling"]
 
 # Tested on Blender 5.2. The shell mold uses the SDF grid Geometry Nodes (Mesh to SDF Grid / Grid to Mesh).
 blender_version_min = "5.2.0"

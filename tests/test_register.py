@@ -2,14 +2,15 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 """Release checks: enabling, disabling and enabling the add-on again in one session leaves exactly one of each
-handler and timer (none after disabling); the Presets menu draws for a new user with no presets of their own;
+handler and timer (none after disabling); the built-in presets come through Blender's preset path API, list for a
+new user with no presets of their own and can't be removed; the manifest keeps only the Modeling tag;
 exporting without a saved file or into a folder that can't be written gives a clear error, not a traceback."""
 import sys, os, tempfile
 import bpy
 sys.stdout.reconfigure(line_buffering=True)
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from _env import EasyMold, OUT
-from EasyMold import preview, operators, presets
+from _env import EasyMold, OUT, ROOT
+from EasyMold import preview, operators
 failures = []
 
 
@@ -46,26 +47,58 @@ check("cycle", all(v == 1 for v in again.values()), f"each handler once {again}"
 check("cycle", bpy.app.timers.is_registered(preview._tick), "preview timer registered")
 check("cycle", hasattr(bpy.types.Scene, "easymold_props"), "scene settings back")
 
-# 2. The Presets menu for a user with no presets of their own (BLENDER_USER_SCRIPTS is an empty folder here).
+# 2. Presets (extensions.blender.org review): no custom presets module; the built-in presets ship in
+# presets/easymold/ and are found through bpy.utils.register_preset_path; the menu lists them for a user with no
+# presets of their own (BLENDER_USER_SCRIPTS is an empty folder here); a built-in preset can't be removed.
+import tomllib  # noqa: E402
+from EasyMold import ui  # noqa: E402
+SHIPPED = os.path.join(str(ROOT), "presets", "easymold")
+check("presets module", not os.path.exists(os.path.join(str(ROOT), "presets.py")), "no custom presets.py")
+check("presets path", os.path.normcase(SHIPPED) in map(os.path.normcase, bpy.utils.preset_paths("easymold")),
+      f"shipped presets found: {bpy.utils.preset_paths('easymold')}")
+shipped = sorted(f for f in os.listdir(SHIPPED) if f.endswith(".py")) if os.path.isdir(SHIPPED) else []
+check("presets path", len(shipped) == 6, f"{len(shipped)} built-in presets")
+EasyMold.unregister()
+check("presets path", os.path.normcase(SHIPPED) not in map(os.path.normcase, bpy.utils.preset_paths("easymold")),
+      "path removed on unregister")
+EasyMold.register()
+
+
 class FakeLayout:
     def __getattr__(self, name):
         return lambda *a, **k: FakeLayout()
 
 
 class FakeMenu:
-    bl_idname = presets.EASYMOLD_MT_presets.__name__
-    preset_operator = presets.EASYMOLD_MT_presets.preset_operator
+    """Stands in for the menu instance: the real class's settings, a layout that accepts anything."""
     layout = FakeLayout()
+    searched = []
 
-    def path_menu(self, *a, **k):
-        pass
+    def __getattr__(self, name):
+        return getattr(ui.EASYMOLD_MT_presets, name)
+
+    def path_menu(self, searchpaths, *a, **k):
+        FakeMenu.searched += list(searchpaths)
 
 
 try:
-    presets.EASYMOLD_MT_presets.draw(FakeMenu(), bpy.context)
-    check("presets empty", True, f"menu drawn (user preset paths: {bpy.utils.preset_paths(presets.SUBDIR)})")
+    ui.EASYMOLD_MT_presets.draw(FakeMenu(), bpy.context)
+    check("presets empty", os.path.normcase(SHIPPED) in map(os.path.normcase, FakeMenu.searched),
+          f"menu drawn from {FakeMenu.searched}")
 except Exception as e:
     check("presets empty", False, f"{type(e).__name__}: {e}")
+soap = os.path.join(SHIPPED, "Soap.py")
+ui.EASYMOLD_MT_presets.bl_label = "Soap"  # as after choosing it in the menu
+try:
+    result = bpy.ops.easymold.add_preset(remove_active=True)
+except RuntimeError as e:
+    result = str(e).strip()
+check("built-in kept", os.path.exists(soap), f"Soap.py still shipped after removing it ({result})")
+
+# The listing keeps only the Modeling tag (extensions.blender.org review).
+with open(os.path.join(str(ROOT), "blender_manifest.toml"), "rb") as f:
+    tags = tomllib.load(f).get("tags")
+check("manifest tags", tags == ["Modeling"], f"tags {tags}")
 
 # 3. Export errors.
 bpy.ops.wm.read_factory_settings(use_empty=True)
