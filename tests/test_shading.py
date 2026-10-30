@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Eddy Moncada Garcia
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-"""Shading of the generated pieces (session 7: the NozzleSockTest pieces looked streaky). The user's object had
+"""Shading of the generated pieces (a past bug: pieces of an object with custom normals looked streaky). The user's object had
 custom normals; the booleans carried them into every piece and the new faces (cut faces, block sides) got
 meaningless ones. Objects with custom normals: no generated piece may keep them (only the plain master copy),
 cut faces must be shaded flat, steep edges sharp, curved surfaces smooth."""
@@ -46,7 +46,7 @@ def with_custom_normals(obj):
     me.normals_split_custom_set_from_vertices([v.co.normalized() for v in me.vertices])
 
 
-def sock():  # like the user's nozzle sock: a short tube with a nozzle hole through it
+def sock():  # like a hot end silicone sock: a short tube with a nozzle hole through it
     bpy.ops.mesh.primitive_cylinder_add(radius=6, depth=5, vertices=64, location=(0, 0, 2.5))
     obj = bpy.context.active_object
     bpy.ops.mesh.primitive_cylinder_add(radius=2.5, depth=8, vertices=48, location=(0, 0, 2.5))

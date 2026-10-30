@@ -123,7 +123,7 @@ for axis in ('Z', 'Y'):
     counts = np.bincount(b.face_classes, minlength=3)
     print(f"TEE split {axis}: ok={counts[0]} no_draft={counts[1]} undercut={counts[2]} notes={b.notes}"); b.abort()
 
-# 1+2) Bolts and anchors on the pumpkin with the user's settings
+# 1+2) Bolts and anchors on the pumpkin
 obj, p = scene(make_pumpkin, mold_type='SILICONE_SHELL', mold_parts='4', silicone_thickness=2.5, wall_thickness=2.0,
                base_thickness=2.0, lip_height=0.6, flat_base=False, voxel_size=0.4, flange_width=2.0,
                flange_thickness=2.0, key_shape='TAPERED', key_radius=1.2, sprue_radius=2.0, sprue_height=5.0)

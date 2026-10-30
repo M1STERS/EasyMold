@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Eddy Moncada Garcia
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-"""Item 12: several objects in one mold (tray). Every mold type, arrangement, per-object pour holes,
+"""Several objects in one mold (tray). Every mold type, arrangement, per-object pour holes,
 originals untouched and hidden, regenerate from a result part. Renders tray_*.png."""
 import sys, importlib, math
 import bpy, bmesh
@@ -150,7 +150,7 @@ objs, coll, by = run("shell2", mixed, layout=True, shot=((170, -90, 120), (0, 30
                      mold_type='SILICONE_SHELL', mold_parts='2', split_axis='X')
 
 def rounded_pair():
-    # Like the bears: a body with a nose sticking out higher up, so the bounding boxes meet at the nose, far
+    # A body with a nose sticking out higher up, so the bounding boxes meet at the nose, far
     # from where the surfaces would come closest.
     out = []
     for y in (0, 60):

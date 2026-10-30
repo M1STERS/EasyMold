@@ -4,13 +4,5 @@
 *.zip
 __pycache__/
 
-# The author's test scenes, notes and private probes
-TestBlender/
-.claude/
-
-# Test and tooling output
+# Test output
 tests/out/
-.superpowers/
-
-# Internal working notes and plans
-docs/superpowers/

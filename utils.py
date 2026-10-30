@@ -636,7 +636,7 @@ def _fits_bed(size, props):
 
 
 # ---------------------------------------------------------------------------
-# Session cache (roadmap item 17): what Generate computed and can use again while nothing it depends on changed.
+# Session cache: what Generate computed and can use again while nothing it depends on changed.
 # Only in memory: the meshes have a fake user (so removing the pieces doesn't free them), lose it while the file is
 # saved (so they aren't written) and are found again by name + token (undo replaces every mesh).
 # ---------------------------------------------------------------------------

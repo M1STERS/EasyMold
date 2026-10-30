@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Eddy Moncada Garcia
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-"""Item 15: curved parting surface (direct molds in 2 parts, 2-part silicone molds).
+"""Curved parting surface (direct molds in 2 parts, 2-part silicone molds).
 Checks: it follows the object's outline (far fewer undercut faces than a flat plane on tilted objects), the
 pieces are closed, in one piece and don't overlap each other or the cast part, the rim stays flat (keys on it),
 the layout surface is editable (moved, its vertices pushed), pour channel from below along it, core, ignored

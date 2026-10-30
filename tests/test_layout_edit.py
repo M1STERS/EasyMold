@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Eddy Moncada Garcia
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-"""Layout editing (session 6): elements added in a free valid spot, kept on their plane / the object while moved,
+"""Layout editing: elements added in a free valid spot, kept on their plane / the object while moved,
 radius in mm, select / delete, errors where an element doesn't apply, blockers over open holes, and Generate
 uses what was edited (pieces closed)."""
 import sys, importlib, math

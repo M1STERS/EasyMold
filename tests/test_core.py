@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Eddy Moncada Garcia
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-"""Item 14: automatic cores for hollow parts in a direct mold.
+"""Automatic cores for hollow parts in a direct mold.
 Checks: which hollows get a core, the prints flush with the block, key pegs, nothing overlapping (core, block
 parts, cast part), pour hole moved off the core, pieces closed and in one piece, layout core (kept, moved,
 deleted), several objects, errors. Renders core_*.png."""

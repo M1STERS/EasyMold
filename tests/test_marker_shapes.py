@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Eddy Moncada Garcia
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-"""Layout point 5: the layout markers are drawn with their real shape, also with Preview off (only them); the
+"""The layout markers are drawn with their real shape, also with Preview off (only them); the
 selected one brighter, a marker being moved / scaled carries its shape; the empties are a sphere (key) or a circle
 (pour hole, vent: flat; bolt: across its axis); layouts made before (cones, cubes) are restyled."""
 import sys, importlib, math

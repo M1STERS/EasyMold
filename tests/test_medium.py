@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Eddy Moncada Garcia
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-"""Items 8-10: material calculator, presets (built-in + user), shrinkage compensation.
+"""Material calculator, presets (built-in + user), shrinkage compensation.
 Run with BLENDER_USER_SCRIPTS pointing to a temporary folder (user presets are written there)."""
 import sys, importlib, os, glob, math
 import bpy, bmesh

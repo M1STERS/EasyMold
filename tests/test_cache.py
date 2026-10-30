@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Eddy Moncada Garcia
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-"""Item 17: session cache. For each mold type: a regenerate that reuses the cache gives exactly the same pieces as one
+"""Session cache. For each mold type: a regenerate that reuses the cache gives exactly the same pieces as one
 without it (also after changing a setting the preparation doesn't depend on); an edit / move of the object or a
 setting it depends on is not served from the cache; the cache is never saved in the file; Clear Cache frees it;
 the panel numbers. Prints the cold and warm times."""

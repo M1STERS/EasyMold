@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Eddy Moncada Garcia
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-"""Item 16: live preview. Overlay plan (every mold type: shapes, nothing left in the scene, original untouched and
+"""Live preview. Overlay plan (every mold type: shapes, nothing left in the scene, original untouched and
 not hidden, timing), the update loop (follows settings and layout markers), bed misfit, Auto Preview (coarse build
 into its own collection, restarted by a change, never touches the selection, removed by Generate / turning it off /
 saving), the face limit."""

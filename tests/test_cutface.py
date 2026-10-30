@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Eddy Moncada Garcia
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-"""Cut faces filled right (session 6 bug: with the pour from the top, the two bears' cut faces covered the cavities).
+"""Cut faces filled right (a past bug: with the pour from the top, the cut faces of two objects covered the cavities).
 A cut near a pole of the object's mesh leaves clusters of nearly coincident corners on the cut face, which Blender's
 triangulation filled wrongly. Dense spheres with their poles on the split plane, several molds/settings: on each
 piece's cut face (sampled on a grid) nothing may be covered twice and nothing may cover the cavity."""

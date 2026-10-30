@@ -356,7 +356,7 @@ class VIEW3D_PT_easymold_output(_SubPanel, bpy.types.Panel):
         col.prop(props, "bed_y")
         col.prop(props, "bed_z")
         box.prop(props, "split_to_fit")
-        # Session cache (item 17): what Generate keeps to regenerate faster.
+        # Session cache: what Generate keeps to regenerate faster.
         objects, surfaces, size = utils.cache_info()
         box = self.layout.box()
         row = box.row()

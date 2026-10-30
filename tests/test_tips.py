@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Eddy Moncada Garcia
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-"""Where the holes touch the cast part (session 7, NozzleSockTest): the entry from below turns down a round elbow
+"""Where the holes touch the cast part: the entry from below turns down a round elbow
 instead of a sharp L, the pour hole/channel and the vents can narrow to a tip (a smaller mark), and the vents can
 lean away from the part instead of running alongside a wall. Each case is built with and without the option and
 checked by sampling points of the pieces: what must be open is open, what must now be mold is mold."""
@@ -44,7 +44,7 @@ def prism(name, outline, y0, y1):
     return obj
 
 
-def ring():  # a thin wall like the user's nozzle sock: 1.4 mm thick, 5 mm high
+def ring():  # a thin wall like a hot end silicone sock: 1.4 mm thick, 5 mm high
     bpy.ops.mesh.primitive_cylinder_add(radius=6, depth=5, vertices=96, location=(0, 0, 2.5))
     obj = bpy.context.active_object
     bpy.ops.mesh.primitive_cylinder_add(radius=4.6, depth=8, vertices=96, location=(0, 0, 2.5))

@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Eddy Moncada Garcia
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-"""Print bed (item 7): warning when a piece doesn't fit; Split to Fit cuts it with filament pin holes."""
+"""Print bed: warning when a piece doesn't fit; Split to Fit cuts it with filament pin holes."""
 import sys, importlib, math
 import bpy, bmesh
 from mathutils import Vector

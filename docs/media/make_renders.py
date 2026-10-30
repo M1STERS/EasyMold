@@ -4,12 +4,13 @@
 """Renders for the README (docs/images/), made headless with Workbench. Never saves anything.
 
     blender -b --factory-startup --python docs/media/make_renders.py -- synthetic [only=name]
-    blender -b TestBlender/NozzleSockTest.blend --python docs/media/make_renders.py -- nozzle
+    blender -b <your file>.blend --python docs/media/make_renders.py -- scene object=<name>
 
     blender -b --factory-startup --python docs/media/make_renders.py -- logo
 
 `synthetic` builds its own objects (box, shell, two-part, tray, curved parting, pour channel and vents, bed split);
-`nozzle` uses the author's hot end sock (direct mold with a core) for hero.png, featured.png and direct_core.png.
+`scene` makes hero.jpg, featured.jpg and direct_core.jpg from an object of an open .blend file (a direct mold in
+2 parts along X with a core, as set up in that file): the file is not part of the repository.
 """
 import math
 import os
@@ -36,6 +37,7 @@ from EasyMold import utils  # noqa: E402
 ARGS = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 MODE = ARGS[0] if ARGS else "synthetic"
 ONLY = next((a.split("=", 1)[1] for a in ARGS if a.startswith("only=")), None)
+OBJECT = next((a.split("=", 1)[1] for a in ARGS if a.startswith("object=")), None)
 
 
 # --- objects ----------------------------------------------------------------------
@@ -231,11 +233,13 @@ def place(obj, angle, target):
     bpy.context.view_layer.update()
 
 
-def nozzle():
-    """The author's hot end sock: a direct mold with a core. Laid open like a book: both halves turned so their cut
-    faces (the cavity, the pour channel and the vents) face the camera, the core between them, the cast sock in
+def scene():
+    """A direct mold with a core for an object of the open file, laid open like a book: both halves turned so their
+    cut faces (the cavity, the pour channel and the vents) face the camera, the core between them, the cast part in
     front."""
-    src = bpy.data.objects["NozzleSock_NozzleSock_Sock"]
+    src = bpy.data.objects.get(OBJECT or "")
+    if src is None:
+        sys.exit(f"make_renders: no object {OBJECT!r} in this file (pass object=<name>)")
     bpy.context.scene.easymold_props.explode = True
     result = generate(src)
     by_end = {o.name.rsplit("_", 1)[-1]: o for o in result.objects if o.type == 'MESH'}
@@ -342,8 +346,8 @@ def logo():
 
 if MODE == "logo":
     logo()
-elif MODE == "nozzle":
-    nozzle()
+elif MODE == "scene":
+    scene()
 else:
     synthetic()
 print("DONE")

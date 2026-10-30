@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Eddy Moncada Garcia
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-"""Item 11: 2-part silicone mold (frame + parting board + master with sprue).
+"""2-part silicone mold (frame + parting board + master with sprue).
 Checks: pieces closed and in one piece, parting line height, board top, keys, sprue reaching the frame top,
 silicone volume, layout Parting Line, every clamping method. Renders bottom/top views."""
 import sys, importlib, math

@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Eddy Moncada Garcia
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-"""Export (item 6): every mold type to STL and 3MF; checks orientation, volume, file validity, re-import."""
+"""Export: every mold type to STL and 3MF; checks orientation, volume, file validity, re-import."""
 import sys, importlib, os, zipfile, tempfile, math
 import xml.etree.ElementTree as ET
 import bpy, bmesh

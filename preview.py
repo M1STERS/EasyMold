@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Eddy Moncada Garcia
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-"""Live preview (roadmap item 16).
+"""Live preview.
 
 Preview: an overlay drawn in the viewport (nothing is added to the scene) with the outline of the mold, the split
 planes or the curved parting surface, keys, bolts, pour holes and vents where the build would put them, and in red
