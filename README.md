@@ -11,6 +11,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0--or--later-blue" alt="License: GPL-3.0-or-later"></a>
   <img src="https://img.shields.io/badge/Blender-5.2%2B-orange?logo=blender&logoColor=white" alt="Blender 5.2+">
+  <a href="https://extensions.blender.org/add-ons/easymold/"><img src="https://img.shields.io/badge/Blender%20Extensions-EasyMold-orange?logo=blender&logoColor=white" alt="EasyMold on Blender Extensions"></a>
   <a href="https://github.com/M1STERS/EasyMold/releases/latest"><img src="https://img.shields.io/github/v/release/M1STERS/EasyMold" alt="Latest release"></a>
   <a href="https://github.com/sponsors/M1STERS"><img src="https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ea4aaa?logo=githubsponsors&logoColor=white" alt="Sponsor on GitHub"></a>
 </p>
@@ -122,8 +123,8 @@ its best flat face.
 
 Requires **Blender 5.2** or newer.
 
-- **From Blender** (once the extension is approved): *Edit → Preferences → Get Extensions*, search for **EasyMold**,
-  and click *Install*.
+- **From Blender**: *Edit → Preferences → Get Extensions*, search for **EasyMold**, and click *Install*. You can also
+  install it from its page on [Blender Extensions](https://extensions.blender.org/add-ons/easymold/).
 - **From a release**: download `easymold-1.0.1.zip` from the
   [latest release](https://github.com/M1STERS/EasyMold/releases/latest). In Blender, go to *Edit → Preferences →
   Get Extensions*, open the ⌄ menu (top right), choose *Install from Disk…* and pick the zip.
