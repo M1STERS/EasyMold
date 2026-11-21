@@ -4105,13 +4105,16 @@ class MoldBuilder:
     def build_direct(self, axes):
         p = self.props
         m = p.margin
+        bevel = m * 0.3
         lo, hi = self._block_bounds()
-
+        
         yield 0.1, "Building block"
         # Rounded edges; the keys sit at m/2 from the outside, so keep the bevel well below that.
-        block = self.add_object(f"{self.name}_Mold", box_mesh("Mold", lo, hi, bevel=m * 0.3))
+        if p.outside_bevel == False:
+            bevel = 0
+        block = self.add_object(f"{self.name}_Mold", box_mesh("Mold", lo, hi, bevel))
         if axes and p.clamp_method == 'CLIP':
-            self.add_block_flanges(block, axes, lo, hi)
+            self.add_block_flanges(block, axes, lo, hi)        
         yield 0.25, "Cutting the cavity"
         self.boolean(block, self.target, 'DIFFERENCE')
 

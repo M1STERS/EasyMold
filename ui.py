@@ -216,6 +216,7 @@ class VIEW3D_PT_easymold_mold(_SubPanel, bpy.types.Panel):
         col = layout.column(align=True)
         if f['direct']:
             col.prop(props, "margin")
+            col.prop(props, "outside_bevel")
             layout.prop(props, "core_object")
             if props.core_object is None:
                 layout.prop(props, "auto_core")

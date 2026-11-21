@@ -207,6 +207,11 @@ class EasyMoldProperties(bpy.types.PropertyGroup):
         description="Thickness of mold material between the object's bounding box and the outside of the block",
         default=10.0, min=1.0, soft_max=50.0,
     )
+    outside_bevel: bpy.props.BoolProperty(
+        name="Bevel", 
+        description="Bevel outside the mold or not, doesn't affect anything functional, True gives better looks for outside corners, False improves bed adhesion.",
+        default=False, # Ideally it shouldn't bevel on the bottom(the surface itll be 3d printed on). For now leaving it off should improve some of the problem with adhesion.
+    )
     core_object: bpy.props.PointerProperty(
         name="Core",
         description="Optional mesh that fills the hollow inside the part (e.g. a heater block shape). "
